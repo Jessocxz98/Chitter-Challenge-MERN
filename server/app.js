@@ -6,7 +6,7 @@ require('dotenv').config({path: '../.env'})
 
 const peepRouter = require('./routes/peep_router');
 const usersRouter = require('./routes/users');
-require('./database/mongodb')
+require('./database/dbConnect')
 
 const app = express();
 
