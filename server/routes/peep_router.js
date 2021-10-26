@@ -1,19 +1,30 @@
-var express = require('express');
-var router = express.Router();
-const Peep = require('../models/peep_model')
+const express = require('express');
+const router = express.Router();
+const PeepModel = require('../database/models/peep_schema')
+
 
 /* GET home page. */
-router.get('/', async (req, res, next) => {
-  const peeps = await Peep.find();
-  res.send(peeps)
+router.get('/', async (req, res) => {
+  try {
+    const peeps = await Peep.find();
+    res.send(peeps)
+  } catch (error) {
+    res.status(500).send(error)
+  }
+  
 })
 
-router.post('/new', async (req, res, next) => {
-  const newPeep = await Peep({ peep: 'Test 2'})
-  newPeep.save((err, peep) => {
-    if (err) { return next(err) };
-    res.status(201).json(peep)
-  })
+router.post('/new', async (req, res) => {
+  const text = req.body.text;
+  const userId = req.body.userId;
+  
+  const newPeep = new PeepModel({ text: 'he heee', userId: 'MJ' })
+  try {
+    await newPeep.save();
+    res.status(200).send(newPeep);
+  } catch (error) {
+    res.status(500).send(error)
+  }
 })
 
 module.exports = router;

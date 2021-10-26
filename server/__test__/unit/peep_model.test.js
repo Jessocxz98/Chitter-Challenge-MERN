@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 
-const Peep = require('../../models/peep_model');
+const Peep = require('../../database/models/peep_schema');
 
 describe('Peep model', () => {
   it('is invalid if no text is provided', () => {
