@@ -12,10 +12,16 @@ describe('User model', () => {
       })
     })
 
-
     it('trims whitespace', () => {
       let user = new User({ username: '   user1  ' });
       expect(user.username).to.equal('user1')
+    })
+
+    it('has a minimum length of 4 characters', () => {
+      let user = new User({ username: 'bob' })
+      user.validate((error) => {
+        expect(error.errors.username).to.equal('username must be at least 4 characters')
+      })
     })
   })
 
