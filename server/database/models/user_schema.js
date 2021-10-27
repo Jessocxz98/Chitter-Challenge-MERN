@@ -11,10 +11,12 @@ const UserSchema = new Schema(
       required: [true, 'Please provide a Username'],
       minlength: [4, 'Username must be at least 4 characters'],
       maxlength: [15, 'Username must not have more than 15 charaters'],
+      match: [/^[a-zA-Z0-9]+$/, 'Username cannot contain spaces'],
       unique: true,
     },
     password: {
       type: String,
+      minlength: [10, 'Password must be at least 10 characters'],
       required: [true, 'Please provide a password']
     }
   }

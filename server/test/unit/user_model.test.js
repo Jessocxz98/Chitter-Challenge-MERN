@@ -15,7 +15,15 @@ describe('User model', () => {
     it('trims whitespace', () => {
       let user = new User({ username: '   user1  ' });
       
-      expect(user['username']).to.equal('user1')
+      expect(user['username']).to.equal('user1');
+    })
+
+    it('cannot contain spaces', () => {
+      let user = new User({ username: 'user 1'});
+
+      user.validate((user) => {
+        expect(user.errors.username.message).to.equal('Username cannot contain spaces')
+      })
     })
 
     it('has a minimum length of 4 characters', () => {
@@ -57,6 +65,14 @@ describe('User model', () => {
 
       user.validate((user), () => {
         expect(user.errors.password.message).to.equal('Please provide a password');
+      })
+    })
+
+    it('has a minimum length of 10', () => {
+      let user = new User({ password: '1234' })
+
+      user.validate((user) => {
+        expect(user.errors.password.message).to.equal('Password must be at least 10 characters');
       })
     })
   })
