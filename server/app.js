@@ -6,6 +6,7 @@ const logger = require('morgan');
 const database = require('./database/dbConnect')
 
 const peepRouter = require('./routes/peep_router');
+const userRouter = require('./routes/user_router');
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 database.dbConnect()
 
 app.use('/peeps', peepRouter);
+app.use('/users', userRouter);
 
 module.exports = app;

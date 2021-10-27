@@ -11,7 +11,6 @@ router.get('/', async (req, res) => {
   } catch (error) {
     res.status(500).send(error)
   }
-  
 })
 
 router.post('/new', async (req, res) => {
