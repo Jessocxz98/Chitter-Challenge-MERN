@@ -6,14 +6,13 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
 
 mongoose.promise = Promise.global;
 
-dbConnect = async () => {
+const dbConnect = () => {
 	mongoose.connect(uri, () => { 'which db: ', console.log(whichDB); });
-	const db = mongoose.connection;
-	db.once('open', () => { console.log('Connected to: ', uri) })
-	db.on('error', (error) => { console.log(error.message) });;
+	return mongoose.connection;
 }
 
-dbClose = () => {
+const dbClose = () => {
 	return mongoose.disconnect(() => { console.log('Connection closed') });
 }
-module.exports = { dbConnect, dbClose };
+
+module.exports = { dbConnect, dbClose, uri };
