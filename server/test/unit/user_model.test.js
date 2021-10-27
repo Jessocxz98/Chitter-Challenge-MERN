@@ -14,8 +14,8 @@ describe('User model', () => {
 
     it('trims whitespace', () => {
       let user = new User({ username: '   user1  ' });
-
-      expect(user.username).to.equal('user1')
+      
+      expect(user['username']).to.equal('user1')
     })
 
     it('has a minimum length of 4 characters', () => {
@@ -31,6 +31,22 @@ describe('User model', () => {
 
       user.validate((user) => {
         expect(user.errors.username.message).to.equal('Username must not have more than 15 charaters');
+      })
+    })
+
+    it('has to be a unique username', () => {
+      new User({ username: 'user1' });
+
+      new User({ username: 'user1' }).validate((user) => {
+        expect(user.errors.username.message).to.equal('Error, expected `username` to be unique. Value: `user1`');
+      })
+    })
+
+    it('has tobe unique, regardless of case used', () => {
+      new User({ username: 'user1' });
+
+      new User({ username: 'USER1' }).validate((user) => {
+        expect(user.errors.username.message).to.equal('Error, expected `username` to be unique. Value: `user1`')
       })
     })
   })
