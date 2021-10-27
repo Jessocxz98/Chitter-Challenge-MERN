@@ -6,10 +6,12 @@
     "node": "v14.18.1"
   },
   "scripts": {
-    "start": "NODE_ENV=dev nodemon ./bin/www",
-    "test": "NODE_ENV=test mocha __test__/integration/*.js __test__/unit/*.js"
+    "start": "nodemon ./bin/www",
+    "test:server": "NODE_ENV=test nodemon ./bin/www",
+    "test": "NODE_ENV=test mocha test/integration/*.js test/unit/*.js "
   },
   "dependencies": {
+    "concurrently": "^6.3.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
