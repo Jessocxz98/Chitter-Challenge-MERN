@@ -7,8 +7,8 @@ describe('User model', () => {
     it('is invalid if no username is provided', () => {
       let user = new User();
 
-      user.validate((error) => {
-        expect(error.errors.username.message).to.equal('Please provide a Username');
+      user.validate((user) => {
+        expect(user.errors.username.message).to.equal('Please provide a Username');
       })
     })
 
@@ -20,9 +20,17 @@ describe('User model', () => {
 
     it('has a minimum length of 4 characters', () => {
       let user = new User({ username: 'bob' })
-      
-      user.validate((error) => {
-        expect(error.errors.username.message).to.equal('Username must be at least 4 characters');
+
+      user.validate((user) => {
+        expect(user.errors.username.message).to.equal('Username must be at least 4 characters');
+      })
+    })
+
+    it('has a maximum length of 15 charaters', () => {
+      let user = new User({ username: 'areallylongnameisnotok' })
+
+      user.validate((user) => {
+        expect(user.errors.username.message).to.equal('Username must not have more than 15 charaters');
       })
     })
   })
