@@ -42,11 +42,21 @@ describe('User model', () => {
       })
     })
 
-    it('has tobe unique, regardless of case used', () => {
+    it('has to be unique, regardless of case used', () => {
       new User({ username: 'user1' });
 
       new User({ username: 'USER1' }).validate((user) => {
         expect(user.errors.username.message).to.equal('Error, expected `username` to be unique. Value: `user1`')
+      })
+    })
+  })
+
+  describe('password', () => {
+    it('is invalid if no password provided', () => {
+      let user = new User();
+
+      user.validate((user), () => {
+        expect(user.errors.password.message).to.equal('Please provide a password');
       })
     })
   })
