@@ -69,7 +69,7 @@ describe('User model', () => {
     })
 
     it('has a minimum length of 10', () => {
-      let user = new User({ password: '1234' })
+      let user = new User({ password: '1234' });
 
       user.validate((user) => {
         expect(user.errors.password.message).to.equal('Password must be at least 10 characters');
@@ -77,6 +77,35 @@ describe('User model', () => {
     })
   })
 
+  describe('email', () => {
+    it('is invalid if no email is provided', () => {
+      let user = new User();
 
+      user.validate((user) => {
+        expect(user.errors.email.message).to.equal('Please provide an email');
+      })
+    })
 
+    it('must provide a valid email', () => {
+      let user = new User({ email: '1' });
+
+      user.validate((user) => {
+        expect(user.errors.email.message).to.equal('Please provide a valid email')
+      })
+    })
+
+    it('throws error if email contains spaces', () => {
+      let user = new User({ email: 'fake @ email . com' });
+
+      user.validate((user) => {
+        expect(user.errors.email.message).to.equal('Please provide a valid email')
+      })
+    })
+
+    it('trims whitespace', () => {
+      let user = new User({ email: '  fake@email.com  ' });
+
+      expect(user['email']).to.equal('fake@email.com');
+    })
+  })
 })

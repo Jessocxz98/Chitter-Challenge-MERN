@@ -18,6 +18,12 @@ const UserSchema = new Schema(
       type: String,
       minlength: [10, 'Password must be at least 10 characters'],
       required: [true, 'Please provide a password']
+    },
+    email: {
+      type: String,
+      required: [true, 'Please provide an email'],
+      trim: true,
+      match: [/^.+@(?:[\w-]+\.)+\w+$/, 'Please provide a valid email']
     }
   }
 )
