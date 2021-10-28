@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 router.post('/new', async (req, res) => {
   const text = req.body.text;
   const userId = req.body.userId;
+  
   const newPeep = new PeepModel({ text: text, userId: userId })
   
   try {

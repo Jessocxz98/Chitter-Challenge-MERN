@@ -35,13 +35,12 @@ describe('peep routes', () => {
   })
 
   it('valid data POST request', async () => {
-    let toSendData = { text: 'hello', userId: 'user_1' };
+    let dataToSend = { text: 'hello', userId: 'user_1' };
     
     try {
-      const res = await request('http://localhost:5000/peeps').post('/new').send(toSendData);
+      const res = await request('http://localhost:5000/peeps').post('/new').send(dataToSend);
       expect(res.statusCode).to.equal(201);
-      expect(res.body.text).to.equal('hello');
-      expect(res.body.userId).to.equal('user_1');
+      expect(res.body).to.contain(dataToSend);
     } catch (err) {
       console.log(err.message);
     }

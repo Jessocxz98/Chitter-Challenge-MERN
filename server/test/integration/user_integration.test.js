@@ -32,4 +32,16 @@ describe('user model', () => {
       .expect('Content-Type', /json/)
       .expect(200, done);
   })
+
+  it('valid data POST request', async () => {
+    let dataToSend = { username: 'user1', password: '0123456789', email: 'fake@email.com' };
+    
+    try {
+      const res = await request('http://localhost:5000/users').post('/new').send(dataToSend);
+      expect(res.statusCode).to.equal(201);
+      expect(res.body).to.contain(dataToSend);
+    } catch (err) {
+      console.log(err.message);
+    }
+  })
 })
