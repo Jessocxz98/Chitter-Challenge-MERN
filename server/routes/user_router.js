@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const UserModel = require('../database/models/user_schema')
+const UserModel = require('../database/schemas/user_schema')
 
 router.get('/', async (req, res) => {
   try {

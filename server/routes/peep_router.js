@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PeepModel = require('../database/models/peep_schema')
+const PeepModel = require('../database/schemas/peep_schema')
 
 
 /* GET home page. */
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.post('/new', async (req, res) => {
   const text = req.body.text;
   const userId = req.body.userId;
-  
+
   const newPeep = new PeepModel({ text: text, userId: userId })
   
   try {
