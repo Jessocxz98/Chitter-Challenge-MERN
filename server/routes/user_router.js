@@ -20,10 +20,10 @@ router.post('/new', async (req, res, next) => {
     email,
     password
    })
+   
   await newUser.save();
-  try {
-    console.log(newUser)
 
+  try {
     res.status(201).send(newUser)
     next()
   } catch (error) {

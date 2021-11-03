@@ -9,8 +9,9 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test:server": "NODE_ENV=test nodemon ./bin/www",
-    "test:units": "NODE_ENV=test mocha test/unit/*.js ",
-    "test:integration": "NODE_ENV=test mocha test/integration/*.js"
+    "test:units": "NODE_ENV=test mocha test/unit/*.js",
+    "test:integration": "NODE_ENV=test mocha test/integration/*.js",
+    "test:all": "concurrently NODE_ENV=test \"npm run test:units\" \"npm run test:integration\""
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
