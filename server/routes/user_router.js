@@ -12,16 +12,20 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/new', async (req, res) => {
-  const username = req.body.username;
-  const email = req.body.email;
-  const password = req.body.password;
+router.post('/new', async (req, res, next) => {
+  const { username, email, password} = req.body
 
-  const newUser = new UserModel({ username: username, email: email, password: password })
-
+  const newUser = new UserModel({ 
+    username,
+    email,
+    password
+   })
+  await newUser.save();
   try {
-    await newUser.save();
+    console.log(newUser)
+
     res.status(201).send(newUser)
+    next()
   } catch (error) {
     res.status(500).send(error.message)
     res.status(404).send(error.message)

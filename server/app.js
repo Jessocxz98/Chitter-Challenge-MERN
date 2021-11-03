@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 database.dbConnect()
+  .on('error', (error) => console.log('Error: ', error))
 
 app.use('/peeps', peepRouter);
 app.use('/users', userRouter);

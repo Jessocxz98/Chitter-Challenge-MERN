@@ -34,14 +34,17 @@ describe('user model', () => {
   })
 
   it('valid data POST request', async () => {
-    let dataToSend = { username: 'user1', password: '0123456789', email: 'fake@email.com' };
+    let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     
     try {
       const res = await request('http://localhost:5000/users').post('/new').send(dataToSend);
       expect(res.statusCode).to.equal(201);
-      expect(res.body).to.contain(dataToSend);
+      expect(res.body.username).to.equal('user1')
+      expect(res.body.password).not.to.equal('01234567890123')
+      expect(res.body.password).to.have.lengthOf(60)
+      expect(res.body.email).to.equal('fake@email.com')
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   })
 })

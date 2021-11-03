@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
+const bcrypt = require('bcrypt');
+
+const SALT_WORK_FACTOR = 10;
 
 const UserSchema = new Schema(
   {
@@ -28,6 +31,29 @@ const UserSchema = new Schema(
   }
 )
 
+UserSchema.pre('save', function(next) {
+  let user = this;
+  console.log(1)
+  // only hash the password if it has been modified (or is new)
+  if (!user.isModified('password')) return next();
+  console.log(2)
+  // generate a salt
+  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    if (err) return next(err.message);
+    console.log(3)
+    // hash the password using our new salt
+    bcrypt.hash(user.password, salt, function(err, hash) {
+        if (err) return next(err);
+        console.log(4)
+        // override the cleartext password with the hashed one
+        user.password = hash;
+        next();
+    });
+  });
+});
+
 UserSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema)
+
+module.exports = User;

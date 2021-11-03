@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 
-const User = require('../../database/models/user_schema');
+const User = require('../../database/schemas/user_schema');
 
 describe('User model', () => {
   describe('username', () => {
