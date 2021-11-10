@@ -25,11 +25,11 @@ describe('user model', () => {
     done();
   })
 
-  it('valid data POST request', async () => {
+  it('valid signup', async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     
     try {
-      const res = await request('http://localhost:5000/users').post('/new').send(dataToSend);
+      const res = await request('http://localhost:5000/users').post('/signup').send(dataToSend);
       expect(res.statusCode).to.equal(201);
       expect(res.body.username).to.equal('user1')
       expect(res.body.password).not.to.equal('01234567890123')
@@ -43,7 +43,7 @@ describe('user model', () => {
   it('user is authenticated', async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     let loginData = { email: dataToSend.email, password: dataToSend.password }
-    await request('http://localhost:5000/users').post('/new').send(dataToSend);
+    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
 
     try {
       const res = await request('http://localhost:5000/users').post('/login').send(loginData);
@@ -57,7 +57,7 @@ describe('user model', () => {
   it("is expected to throw error if email are wrong", async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     let loginData = { email: 'wrong@email.com', password: dataToSend.password }
-    await request('http://localhost:5000/users').post('/new').send(dataToSend);
+    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
 
     try {
       const res = await request('http://localhost:5000/users').post('/login').send(loginData);
@@ -71,7 +71,7 @@ describe('user model', () => {
   it("is expected to throw error if password are wrong", async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     let loginData = { email: dataToSend.email, password: 'wrongpassword1234' }
-    await request('http://localhost:5000/users').post('/new').send(dataToSend);
+    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
 
     try {
       const res = await request('http://localhost:5000/users').post('/login').send(loginData);

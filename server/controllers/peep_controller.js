@@ -3,9 +3,9 @@ const PeepModel = require('../database/models/Peep')
 module.exports.allPeeps_get = async (req, res) => {
   try {
     const peeps = await PeepModel.find();
-    res.send(peeps)
+    res.json(peeps)
   } catch (error) {
-    res.status(500).send(error)
+    res.status(500).json(error)
   }
 }
 
