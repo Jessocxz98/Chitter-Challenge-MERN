@@ -27,7 +27,6 @@ module.exports.login_post = async (req, res) => {
     res.status(200).send({ message: 'Login successful!' })
   }
   catch (err){
-    console.log(err.message)
-    res.status(401).send({ message: err.message})
+    res.status(401).json({ message: err.message})
   }
 }
