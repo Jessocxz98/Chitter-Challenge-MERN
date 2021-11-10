@@ -47,4 +47,18 @@ describe('user model', () => {
       console.log(err);
     }
   })
+
+  it('user is authenticated', async () => {
+    let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
+    let loginData = { email: dataToSend.email, password: dataToSend.password }
+    await request('http://localhost:5000/users').post('/new').send(dataToSend);
+
+    try {
+      const res = await request('http://localhost:5000/users').post('/login').send(loginData);
+      expect(res.status).to.equal(200)
+      expect(res.body.message).to.equal('Login successful!')
+    } catch (err) {
+      console.log(err)
+    }
+  })
 })

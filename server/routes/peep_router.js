@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PeepModel = require('../database/schemas/peep_schema')
+const PeepModel = require('../database/models/Peep')
 
 
 /* GET home page. */

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const UserModel = require('../database/schemas/user_schema')
+const UserModel = require('../database/models/User')
 
 router.get('/', async (req, res) => {
   try {
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/new', async (req, res, next) => {
+router.post('/new', async (req, res) => {
   const { username, email, password} = req.body
 
   const newUser = new UserModel({ 
@@ -20,15 +20,27 @@ router.post('/new', async (req, res, next) => {
     email,
     password
    })
-   
+
   await newUser.save();
 
   try {
     res.status(201).send(newUser)
-    next()
   } catch (error) {
     res.status(500).send(error.message)
     res.status(404).send(error.message)
+  }
+})
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await UserModel.login(email, password)
+    res.status(200).send({ message: 'Login successful!' })
+  }
+  catch (err){
+    console.log(err.message)
+    res.status(401).json({})
   }
 })
 

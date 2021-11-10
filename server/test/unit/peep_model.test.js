@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 
-const Peep = require('../../database/models/peep_schema');
+const Peep = require('../../database/models/Peep');
 
 describe('Peep model', () => {
   it('is invalid if no text is provided', () => {
@@ -15,7 +15,7 @@ describe('Peep model', () => {
     expect(peep.text).to.equal('Test 1')
   })
 
-  it('is expected to have a user asociated with the peep', () => {
+  it('is expected to have a user associated with the peep', () => {
     let peep = new Peep({ text: 'My first peep', userId: 'User1'})
     expect(peep.userId).to.equal('User1')
   })

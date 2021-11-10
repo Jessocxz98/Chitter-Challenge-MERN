@@ -3,8 +3,6 @@ const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcrypt');
 
-const SALT_WORK_FACTOR = 10;
-
 const UserSchema = new Schema(
   {
     username: {
@@ -13,7 +11,7 @@ const UserSchema = new Schema(
       lowercase: true,
       required: [true, 'Please provide a Username'],
       minlength: [4, 'Username must be at least 4 characters'],
-      maxlength: [15, 'Username must not have more than 15 charaters'],
+      maxlength: [15, 'Username must not have more than 15 characters'],
       match: [/^[a-zA-Z0-9]+$/, 'Username cannot contain spaces'],
       unique: true,
     },
@@ -31,24 +29,26 @@ const UserSchema = new Schema(
   }
 )
 
-UserSchema.pre('save', function(next) {
-  let user = this;
-
-  if (!user.isModified('password')) return next();
-
-  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-    if (err) return next(err.message);
-    
-    bcrypt.hash(user.password, salt, function(err, hash) {
-        if (err) return next(err);
-        user.password = hash;
-        next();
-    });
-  });
+UserSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  
+  const salt = await bcrypt.genSalt();
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
+
+UserSchema.statics.login = async function(email, password) {
+  const user = await this.findOne({ email });
+  if (user) {
+    const auth = bcrypt.compare(password, user.password);
+    if (auth) {
+      return user
+    }
+    throw Error('incorrect password')
+  }
+  throw Error('incorrect email');
+}
 
 UserSchema.plugin(uniqueValidator);
 
-const User = mongoose.model('User', UserSchema)
-
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);

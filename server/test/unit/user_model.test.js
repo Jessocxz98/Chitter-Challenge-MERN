@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 
-const User = require('../../database/schemas/user_schema');
+const User = require('../../database/models/User');
 
 describe('User model', () => {
   describe('username', () => {
@@ -34,11 +34,11 @@ describe('User model', () => {
       })
     })
 
-    it('has a maximum length of 15 charaters', () => {
+    it('has a maximum length of 15 characters', () => {
       let user = new User({ username: 'areallylongnameisnotok' })
 
       user.validate((user) => {
-        expect(user.errors.username.message).to.equal('Username must not have more than 15 charaters');
+        expect(user.errors.username.message).to.equal('Username must not have more than 15 characters');
       })
     })
 
