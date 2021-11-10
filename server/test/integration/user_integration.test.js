@@ -31,12 +31,22 @@ describe('user model', () => {
     try {
       const res = await request('http://localhost:5000/users').post('/signup').send(dataToSend);
       expect(res.statusCode).to.equal(201);
-      expect(res.body.username).to.equal('user1')
-      expect(res.body.password).not.to.equal('01234567890123')
-      expect(res.body.password).to.have.lengthOf(60)
-      expect(res.body.email).to.equal('fake@email.com')
+      expect(res.body.user).to.exist
+      expect(res.body.message).to.equal('signup successful!')
     } catch (err) {
       console.log(err);
+    }
+  })
+
+  it('is expected to create a cookie signup', async () => {
+    let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
+    
+    try {
+      const res = await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+      expect(res.header['set-cookie']).not.to.be.empty
+      expect(res.header['set-cookie']).to.match(/jwt=/)
+    } catch (err) {
+      console.log(err)
     }
   })
 

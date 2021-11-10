@@ -7,17 +7,12 @@ const createToken = (id) => {
 
 module.exports.signup_post = async (req, res) => {
   const { username, email, password} = req.body
-
-  const newUser = new UserModel({ 
-    username,
-    email,
-    password
-   })
-
-  await newUser.save();
-
+  
   try {
-    res.status(201).json(newUser)
+    const user = await UserModel.create({ username, email, password});
+    const token = createToken(user._id);
+    res.cookie('jwt', token, { httpOnly: true })
+    res.status(201).json({ user: user._id, message: 'signup successful!'})
   } catch (error) {
     res.status(500).json({ message: error.message })
     res.status(404).json({ message: error.message})
