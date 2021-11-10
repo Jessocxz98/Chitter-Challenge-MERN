@@ -53,4 +53,18 @@ describe('user model', () => {
       console.log(err)
     }
   })
+
+  it("is expected to throw incorrect user credentials if credentials are wrong", async () => {
+    let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
+    let loginData = { email: 'wrong@email.com', password: dataToSend.password }
+    await request('http://localhost:5000/users').post('/new').send(dataToSend);
+
+    try {
+      const res = await request('http://localhost:5000/users').post('/login').send(loginData);
+      expect(res.status).to.equal(401)
+      expect(res.body.message).to.equal('incorrect email or password')
+    } catch (err) {
+      console.log(err)
+    }
+  })
 })
