@@ -25,14 +25,6 @@ describe('user model', () => {
     done();
   })
 
-  it('responds with json', (done) => {
-    request('http://localhost:5000')
-      .get('/users')
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200, done);
-  })
-
   it('valid data POST request', async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     
