@@ -35,7 +35,7 @@ describe('peep routes', () => {
   })
 
   it('valid data POST request', async () => {
-    let dataToSend = { text: 'hello', userId: 'user_1' };
+    let dataToSend = { text: 'hello', username: 'user_1', userId: 'somelongIDstring' };
     
     try {
       const res = await request('http://localhost:5000/peeps').post('/new').send(dataToSend);

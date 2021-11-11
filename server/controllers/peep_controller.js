@@ -10,13 +10,11 @@ module.exports.allPeeps_get = async (req, res) => {
 }
 
 module.exports.newPeep_post = async (req, res) => {
-  const text = req.body.text;
-  const userId = req.body.userId;
+  const { text, username, userId } = req.body
 
-  const newPeep = new PeepModel({ text: text, userId: userId })
+  const newPeep = await PeepModel.create({ text, username, userId })
   
   try {
-    await newPeep.save();
     res.status(201).send(newPeep);
   } catch (error) {
     res.status(500).send(error)
