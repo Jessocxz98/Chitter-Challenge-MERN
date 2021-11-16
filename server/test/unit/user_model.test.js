@@ -68,11 +68,11 @@ describe('User model', () => {
       })
     })
 
-    it('has a minimum length of 10', () => {
+    it('has a minimum length of 8', () => {
       let user = new User({ password: '1234' });
 
       user.validate((user) => {
-        expect(user.errors.password.message).to.equal('Password must be at least 10 characters');
+        expect(user.errors.password.message).to.equal('Password must be at least 8 characters');
       })
     })
   })
