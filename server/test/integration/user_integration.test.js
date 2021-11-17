@@ -91,18 +91,4 @@ describe('user model', () => {
       console.log(err)
     }
   })
-
-  it('is expected to create a cookie login', async () => {
-    let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
-    let loginData = { email: dataToSend.email, password: dataToSend.password }
-    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
-
-    try {
-      const res = await request('http://localhost:5000/users').post('/login').send(loginData);
-      expect(res.header['set-cookie']).not.to.be.empty
-      expect(res.header['set-cookie']).to.match(/jwt=/)
-    } catch (err) {
-      console.log(err)
-    }
-  })
 })
