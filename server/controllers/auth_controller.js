@@ -25,7 +25,8 @@ module.exports.login_post = async (req, res) => {
     const token = createToken(user._id);
     res.status(200).json({ user: token, message: 'Login successful!' })
   }
-  catch (err){
-    res.status(401).json({ message: err.message})
+  catch (error){
+    console.log(error.message)
+    res.status(401).json({ message: error.message })
   }
 }
