@@ -7,11 +7,10 @@ const api = axios.create({
 const PostData = async (address, data) => {
   try {
     const res = await api.post(`${address}`, data)
-    console.log(res)
-    return res
+    return res.data
   }
   catch (err) {
-    console.log(err)
+    return err
   }
 }
 
