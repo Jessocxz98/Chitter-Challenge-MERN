@@ -4,13 +4,12 @@ const api = axios.create({
   baseURL: 'http://localhost:5000'
 })
 
-const PostData = async (address, data) => {
+export const PostData = async (address, data) => {
   try {
-    const res = await api.post(`${address}`, data)
-    return res.data
+    return api.post(`${address}`, data);
   }
   catch (err) {
-    return err
+    return err;
   }
 }
 

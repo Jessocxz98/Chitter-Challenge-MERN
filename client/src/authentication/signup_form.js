@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PostSignupData from '../axios/api';
+import { PostData } from '../axios/api';
 import { ValidUsername, ValidEmail, ValidPassword } from './validation'
 
 export const SignupForm = () => {
@@ -20,7 +20,7 @@ export const SignupForm = () => {
     if (ValidPassword(password, verifyPassword) !== true ) return setPasswordError(ValidPassword(password));
 
     const user = { username, email, password };
-    PostSignupData('/users/signup', user);
+    PostData('/users/signup', user);
   }
 
   return (
