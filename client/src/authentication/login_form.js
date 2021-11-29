@@ -1,16 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Form } from './form_component'
-import { PostData, api } from '../axios/api';
+import { api } from '../axios/api';
 import { useCookies } from 'react-cookie'
 
 
 export const LoginForm = () => {
-  const [apiError, setApiError] = useState('');
+  const [authError, setAuthError] = useState('');
   const [cookie, setCookie, removeCookie] = useCookies(['cookie-name'])
-
-  useEffect(() => {
-
-  }, [])
 
   let template = {
     title: 'Login',
@@ -29,9 +25,17 @@ export const LoginForm = () => {
   }
 
   const onSubmit = async (user) => {
-    const res = await PostData('/users/login', user);
-    if (!res) return setApiError("Incorrect email or password");
-    setCookie('jwt', res.data.user)
+    setAuthError('')
+    
+    try {
+      const res = await api.post('/users/login', user);
+      console.log(res);
+    }
+    catch (err) {
+      setAuthError(err.response.data['message'])
+
+    }
+
   }
 
   return (
@@ -40,7 +44,7 @@ export const LoginForm = () => {
         template={template}
         onSubmit={onSubmit}
       />
-      {apiError && <span className='auth_error'>{apiError}</span>}
+      {authError && <span className='auth_error'>{authError}</span>}
     </div>
   )
 }

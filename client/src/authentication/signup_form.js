@@ -4,7 +4,6 @@ import { Form } from './form_component'
 import { useCookies } from 'react-cookie'
 
 export const SignupForm = () => {
-  const [isSignup, setIsSignup] = useState(true)
   const [cookie, setCookie] = useCookies(['cookie-name']);
   const [usernameError, setUsernameError] = useState('')
   const [emailError, setEmailError] = useState('')
