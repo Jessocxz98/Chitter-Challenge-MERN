@@ -13,8 +13,8 @@ module.exports.signup_post = async (req, res) => {
     const token = createToken(user._id);
     res.status(201).json({ user: token, message: 'signup successful!'})
   } catch (error) {
-    res.status(500).json({ message: error.message })
-    res.status(404).json({ message: error.message })
+    console.log(error)
+    res.status(400).json(error.message.replace('User validation failed: ', ''))
   }
 }
 

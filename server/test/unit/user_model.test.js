@@ -46,7 +46,7 @@ describe('User model', () => {
       new User({ username: 'user1' });
 
       new User({ username: 'user1' }).validate((user) => {
-        expect(user.errors.username.message).to.equal('Error, expected `username` to be unique. Value: `user1`');
+        expect(user.errors.username.message).to.equal("`user1` is not unique. Please provide a unique username");
       })
     })
 
