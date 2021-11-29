@@ -6,11 +6,13 @@ export const Form = ({ template, onSubmit }) => {
 
   const renderFields = (fields) => {
     return fields.map(field => {
-      let { title, type, name } = field;
+      let { title, type, name, error } = field;
       return(
         <div key={name}>
           <label htmlFor={name}>{title}</label>
           <input type={type} name={name} className='input_field' {...register(`${name}`)} />
+          <br/>
+          <span className='input_error'>{error}</span>
         </div>
       )
 

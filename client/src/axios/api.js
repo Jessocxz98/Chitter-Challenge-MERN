@@ -1,14 +1,16 @@
 import axios from "axios";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: 'http://localhost:5000'
 })
 
-export const PostData = async (address, data) => {
+const PostData = async (address, data) => {
   try {
-    return api.post(`${address}`, data);
+    const res = await api.post(`${address}`, data);
+    return res;
   }
   catch (err) {
+    console.log(err.response)
     return err;
   }
 }
