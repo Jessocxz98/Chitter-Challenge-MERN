@@ -31,10 +31,21 @@ describe('user model', () => {
     try {
       const res = await request('http://localhost:5000/users').post('/signup').send(dataToSend);
       expect(res.statusCode).to.equal(201);
-      expect(res.body.user).to.exist
       expect(res.body.message).to.equal('signup successful!')
     } catch (err) {
       console.log(err);
+    }
+  })
+
+  it('is expected to create a cookie signup', async () => {
+    let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
+    
+    try {
+      const res = await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+      expect(res.header['set-cookie']).not.to.be.empty
+      expect(res.header['set-cookie']).to.match(/jwt=/)
+    } catch (err) {
+      console.log(err)
     }
   })
 
@@ -75,6 +86,20 @@ describe('user model', () => {
       const res = await request('http://localhost:5000/users').post('/login').send(loginData);
       expect(res.status).to.equal(401)
       expect(res.body.message).to.equal('incorrect email or password')
+    } catch (err) {
+      console.log(err)
+    }
+  })
+
+  it('is expected to create a cookie login', async () => {
+    let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
+    let loginData = { email: dataToSend.email, password: dataToSend.password }
+    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+
+    try {
+      const res = await request('http://localhost:5000/users').post('/login').send(loginData);
+      expect(res.header['set-cookie']).not.to.be.empty
+      expect(res.header['set-cookie']).to.match(/jwt=/)
     } catch (err) {
       console.log(err)
     }
