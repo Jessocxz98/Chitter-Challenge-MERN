@@ -1,4 +1,6 @@
 const PeepModel = require('../database/models/Peep')
+const UserModel = require('../database/models/User')
+const jwtDecode = require('jwt-decode');
 
 module.exports.allPeeps_get = async (req, res) => {
   try {
@@ -10,13 +12,16 @@ module.exports.allPeeps_get = async (req, res) => {
 }
 
 module.exports.newPeep_post = async (req, res) => {
-  const { text, username, userId } = req.body
+  const { text, token } = req.body;
+  const userId = jwtDecode(token);
+  const user = await UserModel.findOne(userId)
+  const { username, _id } = user;
 
-  const newPeep = await PeepModel.create({ text, username, userId })
-  
   try {
-    res.status(201).send(newPeep);
+    const newPeep = await PeepModel.create({ text, username, userId: _id })
+    res.status(201).json({ newPeep });
   } catch (error) {
-    res.status(500).send(error)
+    console.log(error)
+    res.status(500).json({ error })
   }
 }

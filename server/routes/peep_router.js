@@ -1,9 +1,10 @@
 const Router = require('express');
 const router = Router();
 
-const peepController = require('../controllers/peep_controller')
+const { verifyToken } = require('../middleware/auth.js')
+const { allPeeps_get, newPeep_post } = require('../controllers/peep_controller.js')
 
-router.get('/', peepController.allPeeps_get);
-router.post('/new', peepController.newPeep_post)
+router.get('/', allPeeps_get);
+router.post('/', verifyToken, newPeep_post)
 
 module.exports = router;
