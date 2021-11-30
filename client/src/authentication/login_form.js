@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Form } from './form_component'
+import { Form } from './form_component';
 import { api } from '../axios/api';
 import { useCookies } from 'react-cookie'
 
-
 export const LoginForm = () => {
   const [authError, setAuthError] = useState('');
-  const [cookie, setCookie, removeCookie] = useCookies(['cookie-name'])
+  const [cookie, setCookie] = useCookies(['cookie-name']);
 
   let template = {
     title: 'Login',
@@ -21,7 +20,8 @@ export const LoginForm = () => {
         type: 'password',
         name: 'password'
       }
-    ]
+    ],
+    submitText: 'Login'
   }
 
   const onSubmit = async (user) => {
@@ -29,11 +29,12 @@ export const LoginForm = () => {
     
     try {
       const res = await api.post('/users/login', user);
-      console.log(res);
+      setCookie('user', res.data.token)
+      console.log(cookie)
+      window.location.href = 'http://localhost:3000/'
     }
     catch (err) {
       setAuthError(err.response.data['message'])
-
     }
 
   }
@@ -44,7 +45,6 @@ export const LoginForm = () => {
         template={template}
         onSubmit={onSubmit}
       />
-      {authError && <span className='auth_error'>{authError}</span>}
     </div>
   )
 }

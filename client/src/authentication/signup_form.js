@@ -36,7 +36,8 @@ export const SignupForm = () => {
         name: 'confirmPassword',
         error: passwordError
       }
-    ]
+    ],
+    submitText: 'Signup'
   }
 
   const onSubmit = async (user) => {
@@ -55,9 +56,9 @@ export const SignupForm = () => {
     catch (err) {
       const errors = err.response.data.split(', ');
       errors.map(error => {
-        if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')])
-        if (error.startsWith('email:')) return setEmailError((prevState) => [...prevState, error.replace('email: ', '')])
-        if (error.startsWith('password:')) return setPasswordError((prevState) => [...prevState, error.replace('password: ', '')])
+        if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
+        if (error.startsWith('email:')) return setEmailError((prevState) => [...prevState, error.replace('email: ', '')]);
+        if (error.startsWith('password:')) return setPasswordError((prevState) => [...prevState, error.replace('password: ', '')]);
       })
     }
   }
