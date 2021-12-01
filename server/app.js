@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
 const path = require('path');
 const logger = require('morgan');
 
@@ -10,7 +11,13 @@ const userRouter = require('./routes/user_router');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    `${process.env.CLIENT_URL}`
+  ],
+  credentials: true
+}));
+app.use(cookieParser())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -21,5 +28,8 @@ database.dbConnect()
 
 app.use('/peeps', peepRouter);
 app.use('/users', userRouter);
+app.use((req, res) => {
+  res.header("Allow-Control-Request-Headers")
+})
 
 module.exports = app;

@@ -12,10 +12,10 @@ module.exports.allPeeps_get = async (req, res) => {
 
 module.exports.newPeep_post = async (req, res) => {
   const { text, userId } = req.body;
-  const user = await UserModel.findOne({ _id: userId });
-  const { username } = user;
-
+  if (userId === "") return 'Please login to continue';
   try {
+    const user = await UserModel.findOne({ _id: userId });
+    const { username } = user;
     const newPeep = await PeepModel.create({ text, username, userId })
     res.status(201).json({ newPeep });
   } catch (error) {
