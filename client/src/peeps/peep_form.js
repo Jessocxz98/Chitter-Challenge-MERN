@@ -14,7 +14,7 @@ export const PeepForm = () => {
     e.preventDefault();
     console.log(formData)
     try {
-      const res = await Api.post('/peeps/', formData)
+      const res = await Api.post('/peeps/', formData, { withCredentials: true })
       console.log(res)
     }
     catch (err) {
