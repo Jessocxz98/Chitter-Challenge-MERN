@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { api } from '../axios/api';
+import { Api } from '../axios/api';
 import { Form } from './form_component'
 import { useCookies } from 'react-cookie'
 
@@ -50,8 +50,9 @@ export const SignupForm = () => {
     setPasswordError('');
     
     try {
-      const res = await api.post('/users/signup', user);
-      console.log(res);
+      const res = await Api.post('/users/signup', user, { withCredentials: true });
+      setCookie('user', res.data.token)
+      window.location.href = 'http://localhost:3000/'
     }
     catch (err) {
       const errors = err.response.data.split(', ');

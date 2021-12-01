@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form } from './form_component';
-import { api } from '../axios/api';
+import { Api } from '../axios/api';
 import { useCookies } from 'react-cookie'
 
 export const LoginForm = () => {
@@ -21,16 +21,16 @@ export const LoginForm = () => {
         name: 'password'
       }
     ],
-    submitText: 'Login'
+    submitText: 'Login',
+    error: authError
   }
 
   const onSubmit = async (user) => {
     setAuthError('')
     
     try {
-      const res = await api.post('/users/login', user);
-      setCookie('user', res.data.token)
-      console.log(cookie)
+      const res = await Api.post('/users/login', user, { withCredentials: true });
+      setCookie('user', res.data.id)
       window.location.href = 'http://localhost:3000/'
     }
     catch (err) {
