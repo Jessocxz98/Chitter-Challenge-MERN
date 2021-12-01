@@ -31,7 +31,6 @@ describe('user model', () => {
     try {
       const res = await request('http://localhost:5000/users').post('/signup').send(dataToSend);
       expect(res.statusCode).to.equal(201);
-      expect(res.body.user).to.exist
       expect(res.body.message).to.equal('signup successful!')
     } catch (err) {
       console.log(err);

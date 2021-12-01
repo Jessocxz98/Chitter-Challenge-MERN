@@ -46,7 +46,7 @@ describe('User model', () => {
       new User({ username: 'user1' });
 
       new User({ username: 'user1' }).validate((user) => {
-        expect(user.errors.username.message).to.equal('Error, expected `username` to be unique. Value: `user1`');
+        expect(user.errors.username.message).to.equal("`user1` is not unique. Please provide a unique username");
       })
     })
 
@@ -68,11 +68,11 @@ describe('User model', () => {
       })
     })
 
-    it('has a minimum length of 10', () => {
+    it('has a minimum length of 8', () => {
       let user = new User({ password: '1234' });
 
       user.validate((user) => {
-        expect(user.errors.password.message).to.equal('Password must be at least 10 characters');
+        expect(user.errors.password.message).to.equal('Password must be at least 8 characters');
       })
     })
   })

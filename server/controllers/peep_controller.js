@@ -1,4 +1,5 @@
 const PeepModel = require('../database/models/Peep')
+const UserModel = require('../database/models/User')
 
 module.exports.allPeeps_get = async (req, res) => {
   try {
@@ -10,15 +11,15 @@ module.exports.allPeeps_get = async (req, res) => {
 }
 
 module.exports.newPeep_post = async (req, res) => {
-  const text = req.body.text;
-  const userId = req.body.userId;
-
-  const newPeep = new PeepModel({ text: text, userId: userId })
-  
+  const { text, userId } = req.body;
+  if (userId === "") return 'Please login to continue';
   try {
-    await newPeep.save();
-    res.status(201).send(newPeep);
+    const user = await UserModel.findOne({ _id: userId });
+    const { username } = user;
+    const newPeep = await PeepModel.create({ text, username, userId })
+    res.status(201).json({ newPeep });
   } catch (error) {
-    res.status(500).send(error)
+    console.log(error)
+    res.status(500).json({ error })
   }
 }

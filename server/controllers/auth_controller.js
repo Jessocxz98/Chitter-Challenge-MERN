@@ -12,10 +12,9 @@ module.exports.signup_post = async (req, res) => {
     const user = await UserModel.create({ username, email, password});
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true })
-    res.status(201).json({ user: user._id, message: 'signup successful!'})
+    res.status(201).json({ id: user._id, username, message: 'signup successful!'})
   } catch (error) {
-    res.status(500).json({ message: error.message })
-    res.status(404).json({ message: error.message})
+    res.status(400).json({ message: error.message})
   }
 }
 
@@ -24,10 +23,23 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await UserModel.login(email, password)
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true })
-    res.status(200).json({ user: user._id, message: 'Login successful!' })
+    res.cookie('jwt', token, { path: '/', httpOnly: true })
+    res.status(200).json({ id: user._id, username: user.username, message: 'Login successful!' })
   }
-  catch (err){
-    res.status(401).json({ message: err.message})
+  catch (error){
+    res.status(401).json({ message: error.message })
   }
+}
+
+module.exports.logout = async (req, res) => {
+  try {
+    res.cookie('jwt', null, { httpOnly: true })
+    console.log(res.cookie('jwt'))
+    res.status(202).json({ message: 'Logout successful!'})
+  }
+  catch (err) {
+    console.log(err)
+    res.status(400).json({ message: err.message })
+  }
+  
 }
