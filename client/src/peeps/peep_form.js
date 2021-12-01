@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { api } from '../axios/api';
+import { Api } from '../axios/api';
 
-const initialState = { text: '', token: document.cookie.replace('user=', '') }
+const initialState = { text: '', userId: document.cookie.replace('user=', '') }
 
 export const PeepForm = () => {
   const [formData, setFormData] = useState(initialState);
@@ -14,7 +14,7 @@ export const PeepForm = () => {
     e.preventDefault();
     console.log(formData)
     try {
-      const res = await api.post('/peeps/', formData)
+      const res = await Api.post('/peeps/', formData)
       console.log(res)
     }
     catch (err) {
