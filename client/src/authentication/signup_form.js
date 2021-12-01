@@ -51,11 +51,12 @@ export const SignupForm = () => {
     
     try {
       const res = await Api.post('/users/signup', user, { withCredentials: true });
-      setCookie('user', res.data.token)
+      setCookie('user', res.data.userId)
       window.location.href = 'http://localhost:3000/'
     }
     catch (err) {
-      const errors = err.response.data.split(', ');
+      const errors = err.response.data['message'].replace('User validation failed: ', '').split(', ');
+      console.log(errors)
       errors.map(error => {
         if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
         if (error.startsWith('email:')) return setEmailError((prevState) => [...prevState, error.replace('email: ', '')]);
