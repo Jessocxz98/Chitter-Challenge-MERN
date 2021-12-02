@@ -1,21 +1,31 @@
 import { useState } from 'react';
 import { Api } from '../axios/api';
 
-const initialState = { text: '', userId: document.cookie.replace('user=', '') }
+const initialState = { text: null, userId: document.cookie.replace('user=', '') }
 
 export const PeepForm = () => {
   const [formData, setFormData] = useState(initialState);
+  const [disableButton, setDisableButton] = useState(true);
+  const [error, setError] = useState('')
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    (e.target.value.length === 0) ? setDisableButton(true) : setDisableButton(false);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData)
+    setError('')
+
+    if (formData.text.trim() === '') {
+      e.target.reset()
+      return setError('Peep cannot contain only spaces')
+    }
+
     try {
-      const res = await Api.post('/peeps/', formData, { withCredentials: true })
-      console.log(res)
+      await Api.post('/peeps/', formData, { withCredentials: true })
+      setFormData(initialState);
+      e.target.reset();
     }
     catch (err) {
       console.log(err)
@@ -25,8 +35,9 @@ export const PeepForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <textarea name='text' onChange={handleChange} placeholder="What's on your mind?" />
-        <input type='submit' value='Peep it' />
+        <textarea name='text' type='text' onChange={handleChange} placeholder="What's on your mind?" />
+        <span>{error}</span>
+        <input type='submit' value='Peep it' disabled={disableButton} />
       </form>
     </div>
   )
