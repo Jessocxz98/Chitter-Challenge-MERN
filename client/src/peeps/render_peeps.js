@@ -5,7 +5,7 @@ export const PeepList = ({peeps}) => {
   const renderPeeps = (peeps) => {
     return peeps.map((peep) => {
       let { _id, username, text, createdAt } = peep;
-      let date = new DateTime(createdAt).toFormat('t dd-LL-yy')
+      const date = new DateTime.fromISO(createdAt).toFormat('t dd-LL-yy')
       return(
         <div id={_id} className='peep_card' key={_id}>
           <h4>{username}</h4>
