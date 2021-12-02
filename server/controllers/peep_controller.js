@@ -3,7 +3,7 @@ const UserModel = require('../database/models/User')
 
 module.exports.allPeeps_get = async (req, res) => {
   try {
-    const peeps = await PeepModel.find();
+    const peeps = await PeepModel.find().sort({ createdAt: 'desc' }).exec();
     res.json(peeps)
   } catch (error) {
     res.status(500).json(error)
