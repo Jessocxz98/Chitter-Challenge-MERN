@@ -9,7 +9,7 @@ export const PeepList = ({peeps}) => {
       return(
         <div id={_id} className='peep_card' key={_id}>
           <h4>{username}</h4>
-          <span className='time_stamp'>{date}</span>
+          <span className='time_stamp'>{date.toLowerCase()}</span>
           <p>{text}</p>
         </div>
       )
