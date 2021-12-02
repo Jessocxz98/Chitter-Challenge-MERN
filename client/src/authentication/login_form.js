@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie'
 
 export const LoginForm = () => {
   const [authError, setAuthError] = useState('');
+  // eslint-disable-next-line
   const [cookie, setCookie] = useCookies(['cookie-name']);
 
   let template = {

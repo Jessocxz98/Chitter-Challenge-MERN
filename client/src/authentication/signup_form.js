@@ -4,6 +4,7 @@ import { Form } from './form_component'
 import { useCookies } from 'react-cookie'
 
 export const SignupForm = () => {
+  // eslint-disable-next-line
   const [cookie, setCookie] = useCookies(['cookie-name']);
   const [usernameError, setUsernameError] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -57,6 +58,7 @@ export const SignupForm = () => {
     catch (err) {
       const errors = err.response.data['message'].replace('User validation failed: ', '').split(', ');
       console.log(errors)
+      // eslint-disable-next-line
       errors.map(error => {
         if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
         if (error.startsWith('email:')) return setEmailError((prevState) => [...prevState, error.replace('email: ', '')]);

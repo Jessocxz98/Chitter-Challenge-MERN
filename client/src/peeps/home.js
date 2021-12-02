@@ -11,7 +11,7 @@ export const Home = () => {
       if (document.cookie.length > 0) return setIsLoggedIn(true);
     }
 
-    // Need to set this as a webhook to subscribe to updates on my api for now this is ok
+    // Need to set this as a webhook to subscribe to updates on my api, for now this is ok
     setTimeout(() => {
       fetch('http://localhost:5000/peeps/')
       .then(res => {

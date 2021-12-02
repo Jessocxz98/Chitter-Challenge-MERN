@@ -6,6 +6,7 @@ const loginScreen = 'http://localhost:3000/signup-or-login'
 
 export const LoginOutButton = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // eslint-disable-next-line
   const [cookie, setCookie, removeCookie] = useCookies(['cookie-name']);
 
 
@@ -24,9 +25,8 @@ export const LoginOutButton = () => {
       return window.location.href = loginScreen;
     } else {
       try {
-        const res = await Api.post('/users/logout', { withCredentials: true })
+        await Api.post('/users/logout', { withCredentials: true })
         removeCookie('user')
-        console.log(res)
         return window.location.href = loginScreen;
       }
       catch (err) {
