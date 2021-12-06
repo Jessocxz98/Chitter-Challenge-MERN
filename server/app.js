@@ -26,6 +26,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 database.dbConnect()
   .on('error', (error) => console.log('Error: ', error))
 
+// Code for deployment starts
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
+
+// Code for deployment ends
+
 app.use('/peeps', peepRouter);
 app.use('/users', userRouter);
 app.use((req, res) => {
