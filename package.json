@@ -1,0 +1,17 @@
+{ "name": "social-media-ripoff",
+  "engines": {
+    "node": "v16.10.0",
+    "npm": "^7.24.0"
+  },
+  "scripts": {
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "server": "cd server && npm start",
+    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
+  },
+  "dependencies": {
+    "concurrently": "^6.4.0"
+  }
+}

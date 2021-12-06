@@ -4,10 +4,10 @@
   "private": true,
   "engines": {
     "node": "v16.10.0",
-    "npm": "v8.1.2"
+    "npm": "7.24.0"
   },
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "test:server": "NODE_ENV=test nodemon ./bin/www",
     "test:units": "NODE_ENV=test mocha test/unit/*.js",
     "test:integration": "NODE_ENV=test mocha test/integration/*.js",
@@ -28,6 +28,7 @@
     "mongoose-unique-validator": "^3.0.0",
     "morgan": "~1.10.0",
     "nodemon": "^2.0.14",
+    "npm": "^8.1.2",
     "sinon": "^11.1.2"
   },
   "devDependencies": {
