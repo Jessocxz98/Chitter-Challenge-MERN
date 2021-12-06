@@ -34,7 +34,6 @@ module.exports.login_post = async (req, res) => {
 module.exports.logout = async (req, res) => {
   try {
     res.cookie('jwt', null, { httpOnly: true })
-    console.log(res.cookie('jwt'))
     res.status(202).json({ message: 'Logout successful!'})
   }
   catch (err) {
