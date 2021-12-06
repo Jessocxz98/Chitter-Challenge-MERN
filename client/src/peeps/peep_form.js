@@ -16,10 +16,9 @@ export const PeepForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('')
-
-    if (formData.text.trim() === '') {
+    if (formData.text === null || formData.text.trim() === '' ) {
       e.target.reset()
-      return setError('Peep cannot contain only spaces')
+      return setError('Please enter some text')
     }
 
     try {
@@ -33,11 +32,11 @@ export const PeepForm = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <textarea name='text' type='text' onChange={handleChange} placeholder="What's on your mind?" />
-        <span>{error}</span>
-        <input type='submit' value='Peep it' disabled={disableButton} />
+    <div className='section peep_form_section'>
+      <form onSubmit={handleSubmit} className='form peep_form'>
+        <textarea name='text' type='text' onChange={handleChange} placeholder="What's on your mind?" className='textarea'/>
+        <span className='input_error'>{error}</span>
+        <input type='submit' value='Peep it' disabled={disableButton} className='btn submit_btn'/>
       </form>
     </div>
   )

@@ -41,7 +41,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <div className="section login_section">
+    <div className="login_section">
       <Form 
         template={template}
         onSubmit={onSubmit}

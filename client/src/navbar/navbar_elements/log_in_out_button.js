@@ -37,7 +37,7 @@ export const LoginOutButton = () => {
 
   return (
     <div className='navbar_item'>
-      <input type='button' value={ (isLoggedIn) ? 'Logout' : 'Login' } onClick={handleClick} />
+      <input type='button' value={ (isLoggedIn) ? 'Logout' : 'Login' } onClick={handleClick} className='btn nav_btn' />
     </div>
   )
 }

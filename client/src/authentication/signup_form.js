@@ -57,7 +57,6 @@ export const SignupForm = () => {
     }
     catch (err) {
       const errors = err.response.data['message'].replace('User validation failed: ', '').split(', ');
-      console.log(errors)
       // eslint-disable-next-line
       errors.map(error => {
         if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
@@ -68,7 +67,7 @@ export const SignupForm = () => {
   }
 
   return (
-    <div className="section signup_section">
+    <div className="signup_section">
       <Form 
         template={template}
         onSubmit={onSubmit}

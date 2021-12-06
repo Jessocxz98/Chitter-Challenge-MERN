@@ -8,9 +8,8 @@ export const Form = ({ template, onSubmit }) => {
     return fields.map(field => {
       let { title, type, name, error } = field;
       return(
-        <div key={name}>
-          <label htmlFor={name}>{title}</label>
-          <input type={type} name={name} className='input_field' {...register(`${name}`)} />
+        <div key={name} className='input_container'>
+          <input type={type} name={name} className='input_field' {...register(`${name}`)} placeholder={title} />
           <br/>
           <span className='input_error'>{error}</span>
         </div>
@@ -20,13 +19,11 @@ export const Form = ({ template, onSubmit }) => {
   }
 
   return (
-    <div className='section form_section' >
-      <form onSubmit={handleSubmit(onSubmit)} className='form' >
+      <form onSubmit={handleSubmit(onSubmit)} className='form auth_form' >
         <h4>{title}</h4>
           {renderFields(fields)}
           {error && <span>{error}</span>}
-        <input type='submit' value={submitText} />
+        <input type='submit' value={submitText} className='btn submit_btn' />
       </form>
-    </div>
   )
 }

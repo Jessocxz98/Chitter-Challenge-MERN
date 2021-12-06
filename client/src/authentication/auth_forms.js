@@ -3,14 +3,14 @@ import { SignupForm } from "./signup_form";
 import { LoginForm } from "./login_form";
 
 export const AuthForms = () => {
-  const [isSignup, setIsSignUp] = useState(true);
+  const [isLogin, setIsLogin] = useState(true);
 
-  let buttonMessage = (isSignup) ? 'Already have an account? Login' : "Don't have an account? Login"
+  let buttonMessage = (isLogin) ? "Don't have an account? Signup" : 'Already have an account? Login';
 
   return (
-    <div>
-      {(isSignup) ? <SignupForm /> : <LoginForm />}
-      <button onClick={() => setIsSignUp(!isSignup)}>{buttonMessage}</button>
+    <div className='section form_container'>
+      {(isLogin) ? <LoginForm /> : <SignupForm />}
+      <button onClick={() => setIsLogin(!isLogin)} className='btn switch_btn'>{buttonMessage}</button>
     </div>
   )
 }
