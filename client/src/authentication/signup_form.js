@@ -60,13 +60,15 @@ export const SignupForm = () => {
       let errors;
       if (err.response.data['message']) {
         errors = err.response.data['message'].replace('User validation failed: ', '').split(', ');
+        // eslint-disable-next-line
+        errors.map(error => {
+          if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
+          if (error.startsWith('email:')) return setEmailError((prevState) => [...prevState, error.replace('email: ', '')]);
+          if (error.startsWith('password:')) return setPasswordError((prevState) => [...prevState, error.replace('password: ', '')]);
+        })
       }
-      // eslint-disable-next-line
-      errors.map(error => {
-        if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
-        if (error.startsWith('email:')) return setEmailError((prevState) => [...prevState, error.replace('email: ', '')]);
-        if (error.startsWith('password:')) return setPasswordError((prevState) => [...prevState, error.replace('password: ', '')]);
-      })
+
+
     }
   }
 
