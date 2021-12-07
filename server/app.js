@@ -28,13 +28,12 @@ database.dbConnect()
   .on('error', (error) => console.log('Error: ', error))
 
 // Code for deployment starts
-if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, "build")));
 
   app.get("/*", function (req, res) {
     res.sendFile(path.resolve(__dirname, "build", "index.html"));
   });  
-}
+
 // Code for deployment ends
 
 app.use('/peeps', peepRouter);
