@@ -13,7 +13,7 @@ const app = express();
 
 app.use(cors({
   origin: [
-    `${process.env.PUBLIC_URL}`
+    (process.env.NODE_ENV === 'production') ? `${process.env.PUBLIC_URL}` : 'http://localhost:3000'
   ],
   credentials: true
 }));
