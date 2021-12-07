@@ -56,7 +56,11 @@ export const SignupForm = () => {
       window.location.href = `${process.env.CLIENT_URL}/` || 'http://localhost:3000/'
     }
     catch (err) {
-      const errors = err.response.data['message'].replace('User validation failed: ', '').split(', ');
+      console.log(err)
+      let errors;
+      if (err.response.data['message']) {
+        errors = err.response.data['message'].replace('User validation failed: ', '').split(', ');
+      }
       // eslint-disable-next-line
       errors.map(error => {
         if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
