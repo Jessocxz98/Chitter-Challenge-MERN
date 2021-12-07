@@ -53,7 +53,7 @@ export const SignupForm = () => {
     try {
       const res = await Api.post('/users/signup', user, { withCredentials: true });
       setCookie('user', res.data.userId)
-      window.location.href = 'http://localhost:3000/'
+      window.location.href = `${process.env.CLIENT_URL}` || 'http://localhost:3000/'
     }
     catch (err) {
       const errors = err.response.data['message'].replace('User validation failed: ', '').split(', ');
