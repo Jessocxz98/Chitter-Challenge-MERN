@@ -13,7 +13,7 @@ export const Home = () => {
 
     // Need to set this as a webhook to subscribe to updates on my api, for now this is ok
     setTimeout(() => {
-      fetch('http://localhost:5000/peeps/')
+      fetch('/peeps/')
       .then(res => {
         return res.json();
       })

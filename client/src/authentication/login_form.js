@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form } from './form_component';
-import { Api } from '../axios/api';
+import axios from "axios";
 import { useCookies } from 'react-cookie'
 
 export const LoginForm = () => {
@@ -30,7 +30,7 @@ export const LoginForm = () => {
     setAuthError('')
     
     try {
-      const res = await Api.post('/users/login', user, { withCredentials: true });
+      const res = await axios.post('/users/login', user, { withCredentials: true });
       setCookie('user', res.data.id)
       window.location.href = `${process.env.PUBLIC_URL}/` || 'http://localhost:3000/'
     }
