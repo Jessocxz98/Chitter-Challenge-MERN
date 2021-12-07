@@ -32,7 +32,7 @@ export const LoginForm = () => {
     try {
       const res = await Api.post('/users/login', user, { withCredentials: true });
       setCookie('user', res.data.id)
-      window.location.href = `${process.env.CLIENT_URL}` || 'http://localhost:3000/'
+      window.location.href = `${process.env.CLIENT_URL}/` || 'http://localhost:3000/'
     }
     catch (err) {
       setAuthError(err.response.data['message'])

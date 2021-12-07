@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Api = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: `${process.env.CLIENT_URL}` || 'http://localhost:5000'
 })
 
 const PostData = async (address, data) => {
