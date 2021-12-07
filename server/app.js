@@ -29,10 +29,10 @@ database.dbConnect()
 
 // Code for deployment starts
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, "../client/build")));
+  app.use(express.static(path.resolve(__dirname, "build")));
 
   app.get("/*", function (req, res) {
-    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
   });  
 }
 // Code for deployment ends
