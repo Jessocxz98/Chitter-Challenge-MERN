@@ -7,7 +7,7 @@
     "npm": "7.24.0"
   },
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "test:server": "NODE_ENV=test nodemon ./bin/www",
     "test:units": "NODE_ENV=test mocha test/unit/*.js",
     "test:integration": "NODE_ENV=test mocha test/integration/*.js",
