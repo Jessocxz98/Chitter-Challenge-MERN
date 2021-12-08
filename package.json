@@ -10,7 +10,7 @@
     "heroku-postbuild": "npm run install-client && npm run build",
     "server": "npm run install-server && npm start",
     "install-server": "cd server && npm install",
-    "start": "NODE_ENV=production concurrently --kill-others-on-fail \"npm run server\""
+    "start": "NODE_ENV=production concurrently --kill-others-on-fail \"npm run server\" \"npm run heroku-postbuild\""
   },
   "dependencies": {
     "concurrently": "^6.4.0"
