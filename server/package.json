@@ -7,7 +7,7 @@
     "npm": "7.24.2"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "NODE_ENV=production node app.js",
     "test:server": "NODE_ENV=test nodemon app.js",
     "test:units": "NODE_ENV=test mocha test/unit/*.js",
     "test:integration": "NODE_ENV=test mocha test/integration/*.js",
