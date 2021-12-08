@@ -5,7 +5,6 @@
     "npm": "^7.24.2"
   },
   "scripts": {
-    "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "server": "node index.js",
@@ -17,6 +16,6 @@
   "homepage": "https://social-media-ripoff.herokuapp.com/",
   "root": "build/",
   "routes": {
-    "/**": "index.html"
+    "/": "index.html"
   }
 }
