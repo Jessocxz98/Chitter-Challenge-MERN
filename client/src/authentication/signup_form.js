@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from "axios";
+import { Api } from '../axios/api'
 import { Form } from './form_component'
 import { useCookies } from 'react-cookie'
 
@@ -51,10 +51,9 @@ export const SignupForm = () => {
     setPasswordError('');
     
     try {
-      const res = await axios.post('/users/signup', user, { withCredentials: true });
-      console.log(res.data)
+      const res = await Api.post('/users/signup', user, { withCredentials: true });
       setCookie('user', res.data.id)
-      window.location.href = `${process.env.PUBLIC_URL}/` || 'http://localhost:3000/'
+      window.location.href = (process.env.NODE_ENV === 'production') ? `${process.env.PUBLIC_URL}` : 'http://localhost:3000';
     }
     catch (err) {
       console.log(err)
