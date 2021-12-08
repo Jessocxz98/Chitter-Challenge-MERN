@@ -10,6 +10,7 @@ const peepRouter = require('./routes/peep_router');
 const userRouter = require('./routes/user_router');
 
 const app = express();
+const port = process.env.PORT || 5000;
 
 app.use(cors({
   origin: [
@@ -40,5 +41,9 @@ app.use('/users', userRouter);
 app.use((req, res) => {
   res.header("Allow-Control-Request-Headers")
 })
+
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+});
 
 module.exports = app;
