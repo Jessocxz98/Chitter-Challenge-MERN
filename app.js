@@ -40,9 +40,9 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, "./client/build")));
 }
 
-app.get("/", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
+// app.get("/", function (request, response) {
+//   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+// });
 // Code for deployment ends
 
 app.listen(port, () => {
