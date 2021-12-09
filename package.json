@@ -14,8 +14,7 @@
     "test:all": "concurrently NODE_ENV=test \"npm run test:units\" \"npm run test:integration\"",
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "concurrently --kill-others-on-fail \"node app.js\" \"npm run start --prefix client\""
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
