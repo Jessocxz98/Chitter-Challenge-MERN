@@ -16,6 +16,7 @@ export const Home = () => {
     const getPeeps = async () => {
       try {
         const res = await Api.get('/peeps/');
+        console.log(res.data)
         return setPeeps(res.data)
       }
       catch (err) {
