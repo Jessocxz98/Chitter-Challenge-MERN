@@ -34,10 +34,10 @@ database.dbConnect().on('error', (error) => console.log('Error: ', error))
 
 // Code for deployment starts
 
-app.use(express.static("./client/build"));
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 app.get("/*", function (request, response) {
-  response.sendFile(path.join(__dirname, "./client/build", "index.html"));
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
 // Code for deployment ends
