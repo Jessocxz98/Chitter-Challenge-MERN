@@ -7,12 +7,13 @@
     "npm": "7.24.2"
   },
   "scripts": {
-    "test:server": "NODE_ENV=test nodemon app.js",
+    "test:server": "NODE_ENV=test nodemon server.js",
     "test:units": "NODE_ENV=test mocha test/unit/*.js",
     "test:integration": "NODE_ENV=test mocha test/integration/*.js",
     "test:all": "concurrently NODE_ENV=test \"npm run test:units\" \"npm run test:integration\"",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
-    "start": "node app.js"
+
+    "heroku-postbuild": "NODE_ENV=dev npm install --prefix client && npm run build --prefix client",
+    "start": "node server.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

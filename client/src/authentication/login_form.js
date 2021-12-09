@@ -32,7 +32,7 @@ export const LoginForm = () => {
     try {
       const res = await Api.post('/api/users/login', user, { withCredentials: true });
       setCookie('user', res.data.id)
-      window.location.href = (process.env.NODE_ENV === 'production') ? `${process.env.PUBLIC_URL}` : 'http://localhost:3000';
+      return window.location.href = '/';
     }
     catch (err) {
       console.log(err.response)
