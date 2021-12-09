@@ -41,9 +41,9 @@ app.use('/api/users', userRouter);
 
 // Code for deployment starts
 
-// app.get("/", function (request, response) {
-//   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-// });
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 // Code for deployment ends
 
 app.listen(port, () => {
