@@ -11,9 +11,7 @@
     "test:units": "NODE_ENV=test mocha test/unit/*.js",
     "test:integration": "NODE_ENV=test mocha test/integration/*.js",
     "test:all": "concurrently NODE_ENV=test \"npm run test:units\" \"npm run test:integration\"",
-    "build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
     "start": "node app.js"
   },
   "dependencies": {
