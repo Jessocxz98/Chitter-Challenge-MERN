@@ -6,7 +6,7 @@ module.exports.allPeeps_get = async (req, res) => {
     const peeps = await PeepModel.find().sort({ createdAt: 'desc' }).exec();
     res.json(peeps)
   } catch (error) {
-    res.status(500).json(error)
+    res.status(404).json({error})
   }
 }
 

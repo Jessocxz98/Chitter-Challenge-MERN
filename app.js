@@ -24,6 +24,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+  res.setHeader("Content-Type", "application/json");
+  res.header("Allow-Control-Request-Headers");
+  next();
+})
 
 database.dbConnect().on('error', (error) => console.log('Error: ', error))
 
@@ -39,9 +44,7 @@ app.get("/", function (request, response) {
 
 app.use('/peeps', peepRouter);
 app.use('/users', userRouter);
-app.use((req, res) => {
-  res.header("Allow-Control-Request-Headers")
-})
+
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

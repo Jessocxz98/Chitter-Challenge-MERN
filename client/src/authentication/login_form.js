@@ -31,7 +31,6 @@ export const LoginForm = () => {
     
     try {
       const res = await Api.post('/users/login', user, { withCredentials: true });
-      console.log(res)
       setCookie('user', res.data.id)
       window.location.href = (process.env.NODE_ENV === 'production') ? `${process.env.PUBLIC_URL}` : 'http://localhost:3000';
     }
