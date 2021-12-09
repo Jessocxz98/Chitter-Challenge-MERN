@@ -13,16 +13,19 @@ export const Home = () => {
     }
 
     // Need to set this as a webhook to subscribe to updates on my api, for now this is ok
-    setTimeout(async () => {
+    const getPeeps = async () => {
       try {
-        const res = await Api.get('/peeps/')
-        setPeeps(res.data)
+        const res = await Api.get('/peeps/');
+        return setPeeps(res.data)
       }
       catch (err) {
-
+        console.log(err)
       }
+  
+    }
+    setTimeout(() => {
+      getPeeps()
     }, 1000)
-
     checkUserLoggedIn()
   }, [peeps])
 
