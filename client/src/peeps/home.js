@@ -15,7 +15,7 @@ export const Home = () => {
     // Need to set this as a webhook to subscribe to updates on my api, for now this is ok
     const getPeeps = async () => {
       try {
-        const res = await Api.get('/api/peeps/get');
+        const res = await Api.get('/api/peeps/');
         return setPeeps(res.data)
       }
       catch (err) {
