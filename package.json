@@ -46,6 +46,6 @@
   "homepage": "https://social-media-ripoff.herokuapp.com/",
   "root": "build/",
   "routes": {
-    "/": "index.html"
+    "/**": "index.html"
   }
 }
