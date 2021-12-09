@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
-  res.setHeader("Content-Type", "application/json");
+  res.setHeader("Content-Type", "application/json")
   res.header("Allow-Control-Request-Headers");
   next();
 })
@@ -34,16 +34,16 @@ database.dbConnect().on('error', (error) => console.log('Error: ', error))
 
 // Code for deployment starts
 
-app.use(express.static(path.resolve(__dirname, "client/build")));
+app.use(express.static("./client/build"));
 
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+app.get("/*", function (request, response) {
+  response.sendFile(path.join(__dirname, "./client/build", "index.html"));
 });
 
 // Code for deployment ends
 
-app.use('/peeps', peepRouter);
-app.use('/users', userRouter);
+app.use('/api/peeps', peepRouter);
+app.use('/api/users', userRouter);
 
 
 app.listen(port, () => {

@@ -25,7 +25,7 @@ export const LoginOutButton = () => {
       return window.location.href = loginScreen;
     } else {
       try {
-        await Api.post('/users/logout', { withCredentials: true })
+        await Api.post('/api/users/logout', { withCredentials: true })
         removeCookie('user')
         return window.location.href = loginScreen;
       }
