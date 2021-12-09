@@ -32,13 +32,14 @@ app.use((req, res, next) => {
 
 database.dbConnect().on('error', (error) => console.log('Error: ', error))
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static("./client/build"));
+}
+
 app.use('/api/peeps', peepRouter);
 app.use('/api/users', userRouter);
 
 // Code for deployment starts
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static("./client/build"));
-}
 
 // app.get("/", function (request, response) {
 //   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
