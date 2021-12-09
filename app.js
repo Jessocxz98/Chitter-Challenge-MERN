@@ -36,7 +36,7 @@ app.use('/api/peeps', peepRouter);
 app.use('/api/users', userRouter);
 
 // Serve static assets
-if (process.env.NODE_ENV === 'production') { 
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
   app.get('*', (req, res) => {
