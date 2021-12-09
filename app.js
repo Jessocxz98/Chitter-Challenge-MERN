@@ -32,8 +32,12 @@ app.use((req, res, next) => {
 
 database.dbConnect().on('error', (error) => console.log('Error: ', error))
 
-// Code for deployment starts
 
+
+app.use('/api/peeps', peepRouter);
+app.use('/api/users', userRouter);
+
+// Code for deployment starts
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 app.get("*", function (request, response) {
@@ -41,10 +45,6 @@ app.get("*", function (request, response) {
 });
 
 // Code for deployment ends
-
-app.use('/api/peeps', peepRouter);
-app.use('/api/users', userRouter);
-
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
