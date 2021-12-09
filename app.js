@@ -36,7 +36,7 @@ database.dbConnect().on('error', (error) => console.log('Error: ', error))
 
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 
-app.get("/", function (request, response) {
+app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
