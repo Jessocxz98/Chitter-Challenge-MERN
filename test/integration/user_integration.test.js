@@ -29,7 +29,7 @@ describe('user model', () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     
     try {
-      const res = await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+      const res = await request('http://localhost:5000/api/users').post('/signup').send(dataToSend);
       expect(res.statusCode).to.equal(201);
       expect(res.body.message).to.equal('signup successful!')
     } catch (err) {
@@ -41,7 +41,7 @@ describe('user model', () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     
     try {
-      const res = await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+      const res = await request('http://localhost:5000/api/users').post('/signup').send(dataToSend);
       expect(res.header['set-cookie']).not.to.be.empty
       expect(res.header['set-cookie']).to.match(/jwt=/)
     } catch (err) {
@@ -52,10 +52,10 @@ describe('user model', () => {
   it('user is authenticated', async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     let loginData = { email: dataToSend.email, password: dataToSend.password }
-    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+    await request('http://localhost:5000/api/users').post('/signup').send(dataToSend);
 
     try {
-      const res = await request('http://localhost:5000/users').post('/login').send(loginData);
+      const res = await request('http://localhost:5000/api/users').post('/login').send(loginData);
       expect(res.status).to.equal(200)
       expect(res.body.message).to.equal('Login successful!')
     } catch (err) {
@@ -66,10 +66,10 @@ describe('user model', () => {
   it("is expected to throw error if email is wrong", async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     let loginData = { email: 'wrong@email.com', password: dataToSend.password }
-    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+    await request('http://localhost:5000/api/users').post('/signup').send(dataToSend);
 
     try {
-      const res = await request('http://localhost:5000/users').post('/login').send(loginData);
+      const res = await request('http://localhost:5000/api/users').post('/login').send(loginData);
       expect(res.status).to.equal(401)
       expect(res.body.message).to.equal('incorrect email or password')
     } catch (err) {
@@ -80,10 +80,10 @@ describe('user model', () => {
   it("is expected to throw error if password is wrong", async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     let loginData = { email: dataToSend.email, password: 'wrongpassword1234' }
-    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+    await request('http://localhost:5000/api/users').post('/signup').send(dataToSend);
 
     try {
-      const res = await request('http://localhost:5000/users').post('/login').send(loginData);
+      const res = await request('http://localhost:5000/api/users').post('/login').send(loginData);
       expect(res.status).to.equal(401)
       expect(res.body.message).to.equal('incorrect email or password')
     } catch (err) {
@@ -94,10 +94,10 @@ describe('user model', () => {
   it('is expected to create a cookie login', async () => {
     let dataToSend = { username: 'user1', password: '01234567890123', email: 'fake@email.com' };
     let loginData = { email: dataToSend.email, password: dataToSend.password }
-    await request('http://localhost:5000/users').post('/signup').send(dataToSend);
+    await request('http://localhost:5000/api/users').post('/signup').send(dataToSend);
 
     try {
-      const res = await request('http://localhost:5000/users').post('/login').send(loginData);
+      const res = await request('http://localhost:5000/api/users').post('/login').send(loginData);
       expect(res.header['set-cookie']).not.to.be.empty
       expect(res.header['set-cookie']).to.match(/jwt=/)
     } catch (err) {

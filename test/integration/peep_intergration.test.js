@@ -28,7 +28,7 @@ describe('peep routes', () => {
 
   it('responds with json', (done) => {
     request('http://localhost:5000')
-      .get('/peeps')
+      .get('/api/peeps')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, done);
