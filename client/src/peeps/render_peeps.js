@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import imgPlaceholder from '../images/profile_place_holder.jpeg'
-export const PeepList = ({ peeps }) => {
+export const PeepList = ({peeps}) => {
 
   const renderPeeps = (peeps) => {
     return peeps.map((peep) => {
