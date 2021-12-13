@@ -1,5 +1,20 @@
-# Chitter-Challenge-MERN
-Ripoff of various social media applications
+# Amalgamation
+An amalgamation of various social media applications
+
+Feel free to mess around with this repo by cloning it. Once cloned you'll need to add a `.env` file. Add the following to the `.env` file
+```
+TEST_DB_NAME=
+PROD_DB_NAME=
+DB_PASSWORD=
+DB_USER=
+SECRET_KEY=
+PUBLIC_URL
+```
+
+You'll need to create a database using [MongoDB](https://account.mongodb.com/account/login) and assign the keys their appropriate values. The `SECRET_KEY` is used for JWT generation, give it a value, the harder it is to guess, the better! The key `PUBLIC_URL` is only for production.
+Open a terminal and split it. In one terminal `CD` into `client` and run `npm start`, this will automatically open a window in your browser. In the other run terminal run `npm run dev`, this will start up your api server. You are now running the application locally.
+
+It is ready to deploy using heroku by running `heroku login` this will redirect you to the heroku login screen. Once logged in run `heroku create name-of-application`. Open heroku in the browser and go to settings, you'll need to add *Config Variables* to the application as you have done for running it locally.
 
 Chitter Challenge
 =================
