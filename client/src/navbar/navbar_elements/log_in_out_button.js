@@ -2,8 +2,6 @@ import { useEffect, useState } from "react"
 import { Api } from "../../axios/api";
 import { useCookies } from "react-cookie";
 
-const loginScreen = 'http://localhost:3000/signup-or-login'
-
 export const LoginOutButton = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   // eslint-disable-next-line
@@ -22,12 +20,12 @@ export const LoginOutButton = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     if (isLoggedIn === false) {
-      return window.location.href = loginScreen;
+      return window.location.href = '/signup-or-login';
     } else {
       try {
-        await Api.post('/users/logout', { withCredentials: true })
+        await Api.post('/api/users/logout', { withCredentials: true })
         removeCookie('user')
-        return window.location.href = loginScreen;
+        return window.location.href = '/signup-or-login';
       }
       catch (err) {
         console.log(err)

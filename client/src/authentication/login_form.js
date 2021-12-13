@@ -30,9 +30,9 @@ export const LoginForm = () => {
     setAuthError('')
     
     try {
-      const res = await Api.post('/users/login', user, { withCredentials: true });
+      const res = await Api.post('/api/users/login', user, { withCredentials: true });
       setCookie('user', res.data.id)
-      window.location.href = 'http://localhost:3000/'
+      window.location.href = '/'
     }
     catch (err) {
       setAuthError(err.response.data['message'])
