@@ -1,5 +1,5 @@
 # Chitter-Challenge-MERN
-Rip off of various social media applications
+Ripoff of various social media applications
 
 Chitter Challenge
 =================
