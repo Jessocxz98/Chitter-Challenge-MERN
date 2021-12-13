@@ -1,17 +1,42 @@
-{ "name": "social-media-ripoff",
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
   "engines": {
     "node": "v16.10.0",
-    "npm": "^7.24.0"
+    "npm": "7.24.0"
   },
   "scripts": {
-    "build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
-    "server": "cd server && npm start",
-    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
+    "dev": "nodemon index.js",
+    "test:server": "NODE_ENV=test nodemon ./bin/www",
+    "test:units": "NODE_ENV=test mocha test/unit/*.js",
+    "test:integration": "NODE_ENV=test mocha test/integration/*.js",
+    "test:all": "concurrently NODE_ENV=test \"npm run test:units\" \"npm run test:integration\"",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
+    "start": "node server.js"
   },
   "dependencies": {
-    "concurrently": "^6.4.0"
+    "bcrypt": "^5.0.0",
+    "concurrently": "^6.3.0",
+    "cookie-parser": "~1.4.5",
+    "cors": "^2.8.5",
+    "debug": "~4.3.2",
+    "dotenv": "^10.0.0",
+    "express": "~4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
+    "mongodb": "^4.1.3",
+    "mongoose": "^6.0.12",
+    "mongoose-unique-validator": "^3.0.0",
+    "morgan": "~1.10.0",
+    "nodemon": "^2.0.14",
+    "npm": "^8.1.2",
+    "sinon": "^11.1.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3",
+    "supertest": "^6.1.6"
   }
 }
