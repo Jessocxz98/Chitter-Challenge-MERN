@@ -1,5 +1,5 @@
 # Chitter-Challenge-MERN
-Twitter clone
+Rip off of various social media applications
 
 Chitter Challenge
 =================
