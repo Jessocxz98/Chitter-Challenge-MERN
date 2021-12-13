@@ -19,11 +19,11 @@ export const LoginForm = () => {
       {
         title: 'Password',
         type: 'password',
-        name: 'password'
+        name: 'password',
+        error: authError
       }
     ],
     submitText: 'Login',
-    error: authError
   }
 
   const onSubmit = async (user) => {
@@ -35,7 +35,7 @@ export const LoginForm = () => {
       window.location.href = '/'
     }
     catch (err) {
-      setAuthError(err.response.data['message'])
+      setAuthError(err.response.data.message)
     }
 
   }
