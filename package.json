@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "nodemon index.js",
-    "test:server": "NODE_ENV=test nodemon ./bin/www",
+    "test:server": "NODE_ENV=test nodemon index.js",
     "test:units": "NODE_ENV=test mocha test/unit/*.js",
     "test:integration": "NODE_ENV=test mocha test/integration/*.js",
     "test:all": "concurrently NODE_ENV=test \"npm run test:units\" \"npm run test:integration\"",

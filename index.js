@@ -21,8 +21,6 @@ if (process.env.NODE_ENV !== 'production') {
     ],
     credentials: true
   }));
-
-  app.use('/api', createProxyMiddleware({ target: 'http://localhost:3000', changeOrigin: true }));
 }
 
 app.use(cookieParser());
