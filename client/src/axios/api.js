@@ -1,7 +1,28 @@
 import axios from "axios";
 
 const Api = axios.create({
-  baseURL: (process.env.NODE_ENV === 'production') ? `${process.env.PUBLIC_URL}` : 'http://localhost:5000'
+  baseURL: 'http://localhost:5000'
 })
 
-export { Api };
+const PostData = async (address, data) => {
+  try {
+    const res = await Api.post(`${address}`, data);
+    return res;
+  }
+  catch (err) {
+    console.log(err.response)
+    return err;
+  }
+}
+
+const GetData = async (address) => {
+  try {
+    const res = await Api.get(`${address}`);
+    return res;
+  }
+  catch (err) {
+    console.log(err.response)
+  }
+}
+
+export { PostData, GetData, Api };

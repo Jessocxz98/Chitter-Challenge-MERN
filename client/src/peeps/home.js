@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Api } from '../axios/api'
 import { PeepForm } from './peep_form.js';
 import { PeepList } from "./render_peeps"
 
@@ -13,19 +12,19 @@ export const Home = () => {
     }
 
     // Need to set this as a webhook to subscribe to updates on my api, for now this is ok
-    const getPeeps = async () => {
-      try {
-        const res = await Api.get('/api/peeps/');
-        return setPeeps(res.data)
-      }
-      catch (err) {
-        console.log(err.response)
-      }
-  
-    }
     setTimeout(() => {
-      getPeeps()
+      fetch('http://localhost:5000/peeps/')
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        setPeeps(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }, 1000)
+
     checkUserLoggedIn()
   }, [peeps])
 
