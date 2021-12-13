@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 
 export const Form = ({ template, onSubmit }) => {
   let { register, handleSubmit } = useForm();
-  let { title, fields, submitText, error } = template;
+  let { title, fields, submitText} = template;
 
   const renderFields = (fields) => {
     return fields.map(field => {
@@ -22,7 +22,6 @@ export const Form = ({ template, onSubmit }) => {
       <form onSubmit={handleSubmit(onSubmit)} className='form auth_form' >
         <h4>{title}</h4>
           {renderFields(fields)}
-          {error && <span>{error}</span>}
         <input type='submit' value={submitText} className='btn submit_btn' />
       </form>
   )

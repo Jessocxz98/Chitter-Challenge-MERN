@@ -22,12 +22,12 @@ export const PeepForm = () => {
     }
 
     try {
-      await Api.post('/peeps/', formData, { withCredentials: true })
+      await Api.post('/api/peeps/', formData, { withCredentials: true })
       setFormData(initialState);
       e.target.reset();
     }
     catch (err) {
-      console.log(err)
+      console.log(err.response)
     }
   }
 

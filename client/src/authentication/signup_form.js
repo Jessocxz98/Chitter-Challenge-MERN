@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Api } from '../axios/api';
+import { Api } from '../axios/api'
 import { Form } from './form_component'
 import { useCookies } from 'react-cookie'
 
@@ -52,22 +52,28 @@ export const SignupForm = () => {
     
     try {
       const res = await Api.post('/api/users/signup', user, { withCredentials: true });
-      setCookie('user', res.data.userId)
-      window.location.href = '/'
+      setCookie('user', res.data.id)
+      return window.location.href = '/';
     }
     catch (err) {
-      const errors = err.response.data['message'].replace('User validation failed: ', '').split(', ');
-      // eslint-disable-next-line
-      errors.map(error => {
-        if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
-        if (error.startsWith('email:')) return setEmailError((prevState) => [...prevState, error.replace('email: ', '')]);
-        if (error.startsWith('password:')) return setPasswordError((prevState) => [...prevState, error.replace('password: ', '')]);
-      })
+      let errors;
+      if (err.response.data) {
+        errors = err.response.data.message.replace('User validation failed: ', '').split(', ');
+        // eslint-disable-next-line
+        errors.map(error => {
+          if (error.startsWith('username:')) return setUsernameError((prevState) => [...prevState, error.replace('username: ', '')]);
+          if (error.startsWith('email:')) return setEmailError((prevState) => [...prevState, error.replace('email: ', '')]);
+          if (error.startsWith('password:')) return setPasswordError((prevState) => [...prevState, error.replace('password: ', '')]);
+        })
+      }
+
+
     }
   }
 
   return (
     <div className="signup_section">
+
       <Form 
         template={template}
         onSubmit={onSubmit}
