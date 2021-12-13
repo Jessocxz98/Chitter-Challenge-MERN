@@ -7,12 +7,13 @@
     "npm": "7.24.2"
   },
   "scripts": {
+    "dev": "nodemon server.js",
     "test:server": "NODE_ENV=test nodemon server.js",
     "test:units": "NODE_ENV=test mocha test/unit/*.js",
     "test:integration": "NODE_ENV=test mocha test/integration/*.js",
     "test:all": "concurrently NODE_ENV=test \"npm run test:units\" \"npm run test:integration\"",
 
-    "heroku-postbuild": "NODE_ENV=dev npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
     "start": "node server.js"
   },
   "dependencies": {
@@ -38,10 +39,5 @@
     "chai": "^4.3.4",
     "mocha": "^9.1.3",
     "supertest": "^6.1.6"
-  },
-  "homepage": "https://social-media-ripoff.herokuapp.com/",
-  "root": "build/",
-  "routes": {
-    "/**": "index.html"
   }
 }
