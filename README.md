@@ -8,7 +8,7 @@ PROD_DB_NAME=
 DB_PASSWORD=
 DB_USER=
 SECRET_KEY=
-PUBLIC_URL
+PUBLIC_URL=
 ```
 
 You'll need to create a database using [MongoDB](https://account.mongodb.com/account/login) and assign the keys their appropriate values. The `SECRET_KEY` is used for JWT generation, give it a value, the harder it is to guess, the better! The key `PUBLIC_URL` is only for production.
