@@ -13,7 +13,7 @@
     "test:integration": "NODE_ENV=test mocha test/integration/*.js",
     "test:all": "concurrently NODE_ENV=test \"npm run test:units\" \"npm run test:integration\"",
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
