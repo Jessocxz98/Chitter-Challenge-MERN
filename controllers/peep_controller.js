@@ -15,11 +15,10 @@ module.exports.newPeep_post = async (req, res) => {
   if (userId === "") return 'Please login to continue';
   try {
     const user = await UserModel.findOne({ _id: userId });
-    const { username } = user;
-    const newPeep = await PeepModel.create({ text, username, userId })
-    res.status(201).json({ newPeep });
+    const newPeep = await PeepModel.create({ text, username: user.username, userId });
+    res.status(201).json(newPeep);
   } catch (error) {
     console.log(error)
-    res.status(500).json({ error })
+    res.status(500).json({ message: 'Failed to create peep' })
   }
 }
