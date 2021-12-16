@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports.verifyToken = async (req, res, next) => {
   try {
-    const token = req.header('Cookie').split('; ')[0].replace('jwt=', '');
+    const token = req.cookies.token;
     let decodedData;
     if (token === "") return res.status(401).json({ message: 'Please sign in to continue' })
     if (token) {
@@ -13,6 +13,6 @@ module.exports.verifyToken = async (req, res, next) => {
     next();
   }
   catch (err) {
-    console.log(err)
+    res.status(401).json({ message: 'Unauthorized' })
   }
 }
