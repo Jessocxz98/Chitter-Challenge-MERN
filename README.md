@@ -1,4 +1,4 @@
-# Amalgamation
+# [Amalgamation](https://amalgamation.herokuapp.com/)
 An amalgamation of various social media applications
 
 Feel free to mess around with this repo by cloning it. Once cloned you'll need to add a `.env` file. Add the following to the `.env` file
